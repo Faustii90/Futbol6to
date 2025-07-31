@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefefe;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e86c1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .contenido {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    ol {
+      font-size: 20px;
+      font-family: "Comic Sans MS", sans-serif;
+      padding: 0;
+      margin: 0;
+      list-style-position: outside;
+    }
+
+    ol li {
+      background-color: lightblue;
+      color: black;
+      padding: 15px;
+      margin: 10px 0;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    ol li::after {
+      content: '';
+      display: block;
+      height: 5px;
+      background-color: white;
+      margin-top: 10px;
+      border-radius: 3px;
+    }
+
+    select#filtro-edicion {
+      background-color: #2e86c1;
+      color: white;
+      padding: 10px 12px;
+      font-size: 12px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+    }
+
+    select#filtro-edicion:hover {
+      background-color: #1b4f72;
+    }
+
+    select#filtro-edicion:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(46, 134, 193, 0.5);
+    }
+
+    #busqueda {
+      padding: 10px;
+      width: 200px;
+      border-radius: 100px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong><h1>Ranking</h1></strong>
+    <p>Escuela Nº107</p>
+    <nav>
+      <a href="index.html">Inicio</a> &nbsp;
+      <a href="ranking.html">Ranking</a> &nbsp;
+      <a href="11ideal.html">11 ideal</a>
+    </nav>   
+  </header>
+  <br>
+  <center>
+    <input id="busqueda" type="search" placeholder="Busca jugadores" oninput="filtrarJugadores()">
+    <select id="filtro-edicion" onchange="cambiarEdicion()">
+      <option value="ultima">Última Edición</option>
+      <option value="anterior">Junio</option>
+      <option value="anterior">Mayo</option>
+      <option value="anterior">Abril</option>
+      <option value="anterior">Marzo</option>
+    </select> 
+  </center>
+  <br>
+  <center>
+    <div id="contenido-ranking">
+      <ol id="lista-jugadores" style="text-align: left; list-style-position: inside;">
+        <li id="byron">1. Byron <p style="color: gold;">=</p></li>
+        <li id="sebastian">2. Sebastián <p style="color: green;">↑</p></li>
+        <li id="tomas">3. Tomás <p style="color: gold;">=</p></li>
+        <li id="thiago">4. Thiago <p style="color: gold;">=</p></li>
+        <li id="toto">5. Toto <p style="color: gold;">=</p></li>
+        <li id="juan-manuel">6. Juan Manuel <p style="color: red;">↓</p></li>
+        <li id="felipe">7. Felipe <p style="color: gold;">=</p></li>
+        <li id="mateo">8. Mateo <p style="color: red;">↓</p></li>
+        <li id="liam">9. Liam <p style="color: gold;">=</p></li>
+        <li id="santino">10. Santino C. <p style="color: gold;">=</p></li>
+        <li id="gabriel">11. Gabriel <p style="color: green;">↑</p></li>
+        <li id="gennaro">12. Gennaro <p style="color: gold;">=</p></li>
+        <li id="elias">13. Elías <p style="color: gold;">=</p></li>
+        <li id="faustino">14. Faustino <p style="color: red;">↓</p></li>
+        <li id="renzo">15. Renzo <p style="color: gold;">=</p></li>
+      </ol>
+    </div>
+  </center>
+
+  <script>
+    const jugadoresOriginales = document.getElementById("lista-jugadores").innerHTML;
+
+    function filtrarJugadores() {
+      const input = document.getElementById("busqueda").value.toLowerCase().trim();
+      const lista = document.getElementById("lista-jugadores");
+
+      if (input === "") {
+        lista.innerHTML = jugadoresOriginales;
+        return;
+      }
+
+      const jugadores = Array.from(lista.getElementsByTagName("li"));
+      const coincidencias = jugadores.filter(jugador => jugador.textContent.toLowerCase().includes(input));
+
+      if (coincidencias.length > 0) {
+        lista.innerHTML = "";
+        coincidencias.forEach(j => lista.appendChild(j));
+      } else {
+        lista.innerHTML = "<p style='color: gray;'>No se encontró ningún jugador con ese nombre.</p>";
+      }
+    }
+
+    function cambiarEdicion() {
+      const seleccion = document.getElementById("filtro-edicion").value;
+      const contenedor = document.getElementById("contenido-ranking");
+
+      if (seleccion === "ultima") {
+        contenedor.innerHTML = `<ol id="lista-jugadores" style="text-align: left; list-style-position: inside;">
+          ${jugadoresOriginales}
+        </ol>`;
+      } else {
+        contenedor.innerHTML = `<p style="color: gray;">Todavía no se escribió nada.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

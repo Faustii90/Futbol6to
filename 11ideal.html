@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>11 Ideal - 6º año Escuela 107</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefefe;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e86c1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .contenido {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      margin: 0 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    select#filtro-edicion {
+      background-color: #2e86c1; 
+      color: white;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+    }
+
+    select#filtro-edicion:hover {
+      background-color: #1b4f72;
+    }
+
+    select#filtro-edicion:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(46, 134, 193, 0.5);
+    }
+
+    .centrar {
+      text-align: center;
+    }
+
+    img.oculto {
+      display: none;
+    }
+    
+        .partido {
+      background-color: #eaf2f8;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>11 Ideal de 6º año</h1>
+    <p>Escuela Nº107</p>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="ranking.html">Ranking</a>
+      <a href="#">11 ideal</a>
+    </nav>
+  </header>
+
+  <br>
+
+  <div class="centrar">
+    <select id="filtro-edicion" onchange="cambiarEdicion()">
+      <option value="ultima">Última Edición (Mayo)</option>
+      <option value="junio">Abril</option>
+      <option value="mayo">Marzo</option>
+    </select>
+  </div>
+
+  <br>
+
+  <div class="centrar">
+    <img id="img-ultima" src="11 MAYO.jpg" alt="Imagen de la última edición" width="300">
+    <img id="img-junio" src="ANTERIOR.jpg" alt="Imagen de la edición de Junio" width="300" class="oculto">
+  </div>
+
+  <div id="contenido-ranking" class="contenido"></div>
+  
+  <h1>Próximas Ediciones</h1>
+  <div class="partido">
+      1 de Agosto: EQUIPO DEL MES
+  </div>
+  <div class="partido">
+      7 de Agosto: Equipo de la semana
+  </div>
+  <div class="partido">
+      13 de Agosto: Equipo de la semana
+  </div>
+<script>
+  function cambiarEdicion() {
+    const seleccion = document.getElementById("filtro-edicion").value;
+    const contenedor = document.getElementById("contenido-ranking");
+    const imgUltima = document.getElementById("img-ultima");
+    const imgJunio = document.getElementById("img-junio");
+
+    if (seleccion === "ultima") {
+      imgUltima.classList.remove("oculto");
+      imgJunio.classList.add("oculto");
+      contenedor.innerHTML = ""; // limpio contenido
+    } else if (seleccion === "junio") {
+      imgUltima.classList.add("oculto");
+      imgJunio.classList.remove("oculto");
+      contenedor.innerHTML = ""; // limpio contenido si hay
+    } else {
+      // Otras ediciones: ocultar imágenes y dejar contenedor vacío sin mensaje
+      imgUltima.classList.add("oculto");
+      imgJunio.classList.add("oculto");
+      contenedor.innerHTML = ""; // vacío, sin mensaje
+    }
+  }
+
+  // Cargar estado inicial al abrir la página
+  window.onload = cambiarEdicion;
+</script>
+
+</body>
+</html>
