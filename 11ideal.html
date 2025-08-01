@@ -65,8 +65,8 @@
     img.oculto {
       display: none;
     }
-    
-        .partido {
+
+    .partido {
       background-color: #eaf2f8;
       padding: 10px;
       margin: 10px 0;
@@ -90,57 +90,62 @@
 
   <div class="centrar">
     <select id="filtro-edicion" onchange="cambiarEdicion()">
-      <option value="ultima">Última Edición (Mayo)</option>
-      <option value="junio">Abril</option>
-      <option value="mayo">Marzo</option>
+      <option value="julio">Última edición (Julio)</option>
+      <option value="mayo">Mayo</option>
+      <option value="abril">Abril</option>
+      <option value="marzo">Marzo</option>
     </select>
   </div>
 
   <br>
 
   <div class="centrar">
-    <img id="img-ultima" src="11 MAYO.jpg" alt="Imagen de la última edición" width="300">
-    <img id="img-junio" src="ANTERIOR.jpg" alt="Imagen de la edición de Junio" width="300" class="oculto">
+    <img id="img-julio" src="11 Julio.jpg" alt="11 ideal de julio" width="300" class="oculto">
+    <img id="img-mayo" src="11 MAYO.jpg" alt="11 ideal de mayo" width="300" class="oculto">
+    <img id="img-abril" src="ANTERIOR.jpg" alt="11 ideal de abril" width="300" class="oculto">
   </div>
 
   <div id="contenido-ranking" class="contenido"></div>
-  
+
   <h1>Próximas Ediciones</h1>
   <div class="partido">
-      1 de Agosto: EQUIPO DEL MES
+    1 de Agosto: EQUIPO DEL MES
   </div>
   <div class="partido">
-      7 de Agosto: Equipo de la semana
+    7 de Agosto: Equipo de la semana
   </div>
   <div class="partido">
-      13 de Agosto: Equipo de la semana
+    13 de Agosto: Equipo de la semana
   </div>
-<script>
-  function cambiarEdicion() {
-    const seleccion = document.getElementById("filtro-edicion").value;
-    const contenedor = document.getElementById("contenido-ranking");
-    const imgUltima = document.getElementById("img-ultima");
-    const imgJunio = document.getElementById("img-junio");
 
-    if (seleccion === "ultima") {
-      imgUltima.classList.remove("oculto");
-      imgJunio.classList.add("oculto");
-      contenedor.innerHTML = ""; // limpio contenido
-    } else if (seleccion === "junio") {
-      imgUltima.classList.add("oculto");
-      imgJunio.classList.remove("oculto");
-      contenedor.innerHTML = ""; // limpio contenido si hay
-    } else {
-      // Otras ediciones: ocultar imágenes y dejar contenedor vacío sin mensaje
-      imgUltima.classList.add("oculto");
-      imgJunio.classList.add("oculto");
-      contenedor.innerHTML = ""; // vacío, sin mensaje
+  <script>
+    function cambiarEdicion() {
+      const seleccion = document.getElementById("filtro-edicion").value;
+      const contenedor = document.getElementById("contenido-ranking");
+
+      const imgJulio = document.getElementById("img-julio");
+      const imgMayo = document.getElementById("img-mayo");
+      const imgAbril = document.getElementById("img-abril");
+
+      // Ocultar todas
+      imgJulio.classList.add("oculto");
+      imgMayo.classList.add("oculto");
+      imgAbril.classList.add("oculto");
+      contenedor.innerHTML = "";
+
+      // Mostrar la correspondiente
+      if (seleccion === "julio") {
+        imgJulio.classList.remove("oculto");
+      } else if (seleccion === "mayo") {
+        imgMayo.classList.remove("oculto");
+      } else if (seleccion === "abril") {
+        imgAbril.classList.remove("oculto");
+      }
+      // Marzo u otras ediciones: no se muestra nada
     }
-  }
 
-  // Cargar estado inicial al abrir la página
-  window.onload = cambiarEdicion;
-</script>
+    window.onload = cambiarEdicion;
+  </script>
 
 </body>
-</html>
+  </html
